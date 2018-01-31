@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:resttest/clientrest.dart';
 
 void main() => runApp(new MyApp());
@@ -30,8 +27,9 @@ class _MyHomePageState extends State<MyHomePage> {
   var text = new Text("HOLA");
 
   RestClient client = new RestClient();
-  final Uri url = new Uri.http("10.0.2.2:3000", "movie/2");
+  final String url = "http://10.0.2.2:3000/movie/2";
   final Uri url2 = new Uri.http("10.0.2.2:3000", "movie/");
+  final Uri url3 = new Uri.http("10.0.2.2:3000", "movie/9");
   Map<String, Object> data;
   List<Map> qwe;
 
@@ -40,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //
 //    print("BBB: " + qwe.toString());
 
-    data = await client.getObject(url);
+    data = await client.getObject(url4);
 
     setState(() {
       text = new Text(data.toString());
@@ -49,6 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
     print("BBB: " + data.toString());
 
     client.post(url2, data);
+
+    //data["director"] = "Pepe" + data["director"];
+    //data["title"] = "Torrent";
+
+    //client.put(url, data);
+
+    client.delete(url3);
   }
 
   @override
